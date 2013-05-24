@@ -60,8 +60,8 @@ public class AllMyDrawings
 	
 	// Draw two vending machines with windows
 	
-	VendingMachineWithWindow mw1 = new VendingMachineWithWindow(50,350,40,75);
-	VendingMachineWithWindow mw2 = new VendingMachineWithWindow(200,350,200,100);
+	VendingMachineWithWindow mw1 = new VendingMachineWithWindow(50,300,40,75);
+	VendingMachineWithWindow mw2 = new VendingMachineWithWindow(200,250,200,50);
 	
 	g2.draw(mw1);
 	g2.setColor(new Color(0x8F00FF)); g2.draw(mw2);
@@ -80,28 +80,28 @@ public class AllMyDrawings
 
 	// Draw some vending machines
 	
-	VendingMachine large_door = new VendingMachine(20,100,200,100);
-	VendingMachine small_door = new VendingMachine(30,50,10,20);
-	VendingMachine tall_door = new VendingMachine(150,150,15,100);
-	VendingMachine short_door = new VendingMachine(50,250,100,10);
-	VendingMachine rectangle_door = new VendingMachine(300,300,100,100);
+	VendingMachine large_machine = new VendingMachine(20,100,200,100);
+	VendingMachine small_machine = new VendingMachine(30,50,10,20);
+	VendingMachine tall_machine = new VendingMachine(150,150,15,100);
+	VendingMachine short_machine = new VendingMachine(50,250,100,10);
+	VendingMachine rectangle_machine = new VendingMachine(300,250,100,100);
 
-	g2.setColor(Color.yellow); g2.draw(large_door);
-	g2.setColor(Color.pink);   g2.draw(small_door);
-	g2.setColor(Color.orange);  g2.draw(tall_door);
-	g2.setColor(Color.green); g2.draw(short_door);
-	g2.setColor(Color.darkGray); g2.draw(rectangle_door);
+	g2.setColor(Color.yellow); g2.draw(large_machine);
+	g2.setColor(Color.pink);   g2.draw(small_machine);
+	g2.setColor(Color.orange);  g2.draw(tall_machine);
+	g2.setColor(Color.green); g2.draw(short_machine);
+	g2.setColor(Color.darkGray); g2.draw(rectangle_machine);
 	
 	// Make another pink vending machine that's 30% the size, 
 	// and moved over 200 pixels in x direction
-	Shape door_translated = ShapeTransforms.scaledCopyOfLL(large_door,0.3,0.3);
-	door_translated = ShapeTransforms.translatedCopyOf(door_translated,200,0);
-	g2.setColor(Color.pink); g2.draw(door_translated);
+	Shape machine_translated = ShapeTransforms.scaledCopyOfLL(large_machine,0.3,0.3);
+	machine_translated = ShapeTransforms.translatedCopyOf(machine_translated,200,0);
+	g2.setColor(Color.pink); g2.draw(machine_translated);
 	
 	// Here's a vending machine that's 5x as big
 	// and moved 100 more pixels to down.
-        door_translated = ShapeTransforms.scaledCopyOfLL(door_translated,5,5);
-	door_translated = ShapeTransforms.translatedCopyOf(door_translated,0,100);
+        machine_translated = ShapeTransforms.scaledCopyOfLL(machine_translated,5,5);
+	machine_translated = ShapeTransforms.translatedCopyOf(machine_translated,0,100);
 	
 	// We'll draw this with a thicker stroke
 	Stroke thick = new BasicStroke (4.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL);       
@@ -113,20 +113,25 @@ public class AllMyDrawings
 	Stroke orig=g2.getStroke();
 	g2.setStroke(thick);
 	g2.setColor(new Color(0x00FF7F)); 
-	g2.draw(door_translated); 
+	g2.draw(machine_translated); 
 	
 	// Draw two vending machine with windows
 	
-	VendingMachineWithWindow mw1 = new VendingMachineWithWindow(50,400,40,80);
-	VendingMachineWithWindow mw2 = new VendingMachineWithWindow(150,250,200,100);
+	VendingMachineWithWindow mw1 = new VendingMachineWithWindow(50,350,40,80);
+	VendingMachineWithWindow mw2 = new VendingMachineWithWindow(150,250,200,100);	
 	
 	g2.draw(mw1);
 	g2.setColor(new Color(0xE9D66B)); 
+	g2.draw(mw2); g2.setColor(new Color(0x967BB6));
+	// Rotate the second vending machine 180 degrees around its center.
+	Shape mw3 = ShapeTransforms.rotatedCopyOf(mw2, Math.PI);
+	mw3 = ShapeTransforms.translatedCopyOf(mw3,0,200);
+	g2.draw(mw3); g2.setColor(new Color(0xEE82EE));
 
-	// Rotate the second house 135 degrees around its center.
-	Shape dw3 = ShapeTransforms.rotatedCopyOf(mw2, 3.0*Math.PI);
-	
-	g2.draw(dw3);
+	// Rotate the third vending machine 135 degrees around its center.
+	Shape mw4 = ShapeTransforms.rotatedCopyOf(mw2, (3.0*Math.PI)/4.0);
+	mw4 = ShapeTransforms.translatedCopyOf(mw4,125,100);
+	g2.draw(mw4);
 	
 	// @@@ FINALLY, SIGN AND LABEL YOUR DRAWING
 	
