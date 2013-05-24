@@ -20,6 +20,7 @@ import edu.ucsb.cs56.S13.drawings.utilities.GeneralPathWrapper;
  * A class with static methods for drawing various pictures
  * 
  * @author Phill Conrad 
+ * @author Marc Lindsay, changed to draw Doors and DoorsWithWindows
  * @version for CS10, lab06, Spring 2009
  */
 
@@ -73,86 +74,97 @@ public class AllMyDrawings
     }
 
 
-    /** Draw a picture with a few houses and coffee cups
+    /** Draw a picture with a few doors
      */
     public static void drawPicture2(Graphics2D g2) {
 
-	// Draw some coffee cups.
+	// Draw some doors
 	
-	CoffeeCup large = new CoffeeCup(100,50,225,150);
-	CoffeeCup smallCC = new CoffeeCup(20,50,40,30);
-	CoffeeCup tallSkinny = new CoffeeCup(20,150,20,40);
-	CoffeeCup shortFat = new CoffeeCup(20,250,40,20);
+	Door large_door = new Door(20,100,200,100);
+	Door small_door = new Door(30,50,10,20);
+	Door tall_door = new Door(150,150,15,100);
+	Door short_door = new Door(50,250,100,10);
+	Door rectangle_door = new Door(300,300,100,100);
+
+	g2.setColor(Color.yellow); g2.draw(large_door);
+	g2.setColor(Color.pink);   g2.draw(small_door);
+	g2.setColor(Color.orange);  g2.draw(tall_door);
+	g2.setColor(Color.green); g2.draw(short_door);
+	g2.setColor(Color.darkGray); g2.draw(rectangle_door);
 	
-	g2.setColor(Color.RED);     g2.draw(large);
-	g2.setColor(Color.GREEN);   g2.draw(smallCC);
-	g2.setColor(Color.BLUE);    g2.draw(tallSkinny);
-	g2.setColor(Color.MAGENTA); g2.draw(shortFat);
+	// Make another pink door that's 30% the size, 
+	// and moved over 200 pixels in x direction
+	Shape door_translated = ShapeTransforms.scaledCopyOfLL(large_door,0.3,0.3);
+	door_translated = ShapeTransforms.translatedCopyOf(door_translated,200,0);
+	g2.setColor(Color.pink); g2.draw(door_translated);
 	
-	House h1 = new House(100,250,50,75);
-	g2.setColor(Color.CYAN); g2.draw(h1);
-	
-	// Make a black house that's half the size, 
-	// and moved over 150 pixels in x direction
-	Shape h2 = ShapeTransforms.scaledCopyOfLL(h1,0.5,0.5);
-	h2 = ShapeTransforms.translatedCopyOf(h2,150,0);
-	g2.setColor(Color.BLACK); g2.draw(h2);
-	
-	// Here's a house that's 4x as big (2x the original)
-	// and moved over 150 more pixels to right.
-	h2 = ShapeTransforms.scaledCopyOfLL(h2,4,4);
-	h2 = ShapeTransforms.translatedCopyOf(h2,150,0);
+	// Here's a house that's 5x as big
+	// and moved 100 more pixels to down.
+        door_translated = ShapeTransforms.scaledCopyOfLL(door_translated,5,5);
+	door_translated = ShapeTransforms.translatedCopyOf(door_translated,0,100);
 	
 	// We'll draw this with a thicker stroke
 	Stroke thick = new BasicStroke (4.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL);       
 	
 	// for hex colors, see (e.g.) http://en.wikipedia.org/wiki/List_of_colors
-	// #002FA7 is "International Klein Blue" according to Wikipedia
+	// #00FF7F" Guppie Green according to Wikipedia
 	// In HTML we use #, but in Java (and C/C++) its 0x
 	
 	Stroke orig=g2.getStroke();
 	g2.setStroke(thick);
-	g2.setColor(new Color(0x002FA7)); 
-	g2.draw(h2); 
+	g2.setColor(new Color(0x00FF7F)); 
+	g2.draw(door_translated); 
 	
 	// Draw two houses with Windows
 	
-	HouseWithWindows hw1 = new HouseWithWindows(50,350,40,75);
-	HouseWithWindows hw2 = new HouseWithWindows(200,350,200,100);
+	DoorWithWindows dw1 = new DoorWithWindows(50,400,40,80);
+	DoorWithWindows dw2 = new DoorWithWindows(150,250,200,100);
 	
-	g2.draw(hw1);
-	g2.setColor(new Color(0x8F00FF)); 
+	g2.draw(dw1);
+	g2.setColor(new Color(0xE9D66B)); 
 
-	// Rotate the second house 45 degrees around its center.
-	Shape hw3 = ShapeTransforms.rotatedCopyOf(hw2, Math.PI/4.0);
-
-	g2.draw(hw3);
+	// Rotate the second house 135 degrees around its center.
+	Shape dw3 = ShapeTransforms.rotatedCopyOf(dw2, 3.0*Math.PI);
+	
+	g2.draw(dw3);
 	
 	// @@@ FINALLY, SIGN AND LABEL YOUR DRAWING
 	
 	g2.setStroke(orig);
 	g2.setColor(Color.BLACK); 
-	g2.drawString("A bunch of Coffee Cups and a few houses by Phill Conrad", 20,20);
+	g2.drawString("A bunch of doors and a few doors with windows by Marc Lindsay", 20,20);
     }
   
-    /** Draw a different picture with a few houses and coffee cups
+    /** Draw a different picture with doors with windows
      */
 
     public static void drawPicture3(Graphics2D g2) {
 	
-	// label the drawing
+	// A few of doors with windows, and their mirror images
 	
-	g2.drawString("A bunch of Coffee Cups by Phill Conrad", 20,20);
+	g2.drawString("A bunch of doors with windows by Marc Lindsay", 20,20);
+	
+	// Draw some doors with windows.
+	
+       DoorWithWindows door1 = new DoorWithWindows(50,50,75,150);
+       DoorWithWindows door2 = new DoorWithWindows(130,50,75,150);
+       DoorWithWindows door3 = new DoorWithWindows(210,50,75,150);
+       g2.setColor(new Color(0xADFF2F));   g2.draw(door1);
+       g2.setColor(new Color(0x5218FA));  g2.draw(door2);
+       g2.setColor(new Color(0x3FFF00)); g2.draw(door3);
+	
+       Shape t_door1 = ShapeTransforms.rotatedCopyOf(door1, 2.0*Math.PI);	   
+       t_door1 = ShapeTransforms.translatedCopyOf(t_door1,0,155);
 
-	
-	// Draw some coffee cups.
-	
-       CoffeeCup large = new CoffeeCup(100,50,225,150);
-       CoffeeCup smallCC = new CoffeeCup(20,50,40,30);
-       
-       g2.setColor(Color.RED);     g2.draw(large);
-       g2.setColor(Color.GREEN);   g2.draw(smallCC);
-       
+       Shape t_door2 = ShapeTransforms.rotatedCopyOf(door2, 2.0*Math.PI);	   
+       t_door2 = ShapeTransforms.translatedCopyOf(t_door2,0,155);
+
+       Shape t_door3 = ShapeTransforms.rotatedCopyOf(door3, 2.0*Math.PI);	   
+       t_door3 = ShapeTransforms.translatedCopyOf(t_door3,0,155);
+
+       g2.setColor(new Color(0x3FFF00));   g2.draw(t_door1);
+       g2.setColor(new Color(0xADFF2F));  g2.draw(t_door2);
+       g2.setColor(new Color(0x5218FA)); g2.draw(t_door3);
        
     }
     

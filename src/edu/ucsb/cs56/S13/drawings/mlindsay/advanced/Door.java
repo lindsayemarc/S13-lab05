@@ -44,7 +44,7 @@ public class Door extends GeneralPathWrapper implements Shape
         // hard coded a particular drawing, this may be an easier
         // way.
 	double handle_x = x + width - (width/7);
-	double handle_y = y + (width/2);
+	double handle_y = y + (height/3);
 	double handle_radius = (width/20);
 
 	// create an ellipse for the door handle
