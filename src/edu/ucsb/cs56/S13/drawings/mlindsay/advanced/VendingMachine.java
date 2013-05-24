@@ -10,13 +10,12 @@ import java.awt.geom.Rectangle2D;
 import java.awt.Rectangle;
 import java.awt.geom.PathIterator;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
 
 import edu.ucsb.cs56.S13.drawings.utilities.ShapeTransforms;
 import edu.ucsb.cs56.S13.drawings.utilities.GeneralPathWrapper;
 
 /**
-   A vector drawing of a door that implements
+   A vector drawing of a vending machine that implements
    the Shape interface, and so can be drawn, as well as
    rotated, scaled, etc.
       
@@ -24,18 +23,18 @@ import edu.ucsb.cs56.S13.drawings.utilities.GeneralPathWrapper;
    @version for CS56, Winter 11, UCSB
    
 */
-public class Door extends GeneralPathWrapper implements Shape
+public class VendingMachine extends GeneralPathWrapper implements Shape
 {
      /**
        Constructor
 
-       @param x x coord of lower left corner of door
-       @param y y coord of lower left corner of door
-       @param width width of door 
-       @param height of door
+       @param x x coord of lower left corner of machine
+       @param y y coord of lower left corner of machine
+       @param width width of machine
+       @param height of machine
      */
 
-    public Door(double x, double y, double width, double height)
+    public VendingMachine(double x, double y, double width, double height)
     {
     
         // Rather than having to scale at the end, we can just
@@ -43,20 +42,22 @@ public class Door extends GeneralPathWrapper implements Shape
         // x, y, width and height.   If you haven't already
         // hard coded a particular drawing, this may be an easier
         // way.
-	double handle_x = x + width - (width/7);
-	double handle_y = y + (height/3);
-	double handle_radius = (width/20);
+	double dispenser_x = x + 5;
+	double dispenser_y = y + height - (0.1*height + 2);
+	double dispenser_w = width-10;
+	double dispenser_h = 0.1*height;
 
-	// create an ellipse for the door handle
-       	Ellipse2D door_handle =
-	    new Ellipse2D.Double(handle_x,handle_y,handle_radius*2,handle_radius*2);
-	// create the actual door frame
-	Rectangle2D.Double door = 
-            new Rectangle2D.Double(x,y,width,height);		
+   // create a rectangle for the dispenser
+   Rectangle2D.Double dispenser =
+       new Rectangle2D.Double(dispenser_x,dispenser_y,dispenser_w,dispenser_h);
 
-        //put the whole door together     
-        GeneralPath wholeDoor = this.get();
-        wholeDoor.append(door, false);
-        wholeDoor.append(door_handle, false);
-        }   
+   // create the actual vending machine frame
+   Rectangle2D.Double machine = 
+       new Rectangle2D.Double(x,y,width,height);		
+   
+   //put the whole vending machine together     
+   GeneralPath wholeMachine = this.get();
+   wholeMachine.append(machine, false);
+   wholeMachine.append(dispenser, false);
+    }   
 }
