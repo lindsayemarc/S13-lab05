@@ -31,7 +31,7 @@ public class VendingMachine extends GeneralPathWrapper implements Shape
        @param x x coord of lower left corner of machine
        @param y y coord of lower left corner of machine
        @param width width of machine
-       @param height of machine
+       @param height height of machine
      */
 
     public VendingMachine(double x, double y, double width, double height)
