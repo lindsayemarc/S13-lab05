@@ -26,7 +26,7 @@ import edu.ucsb.cs56.S13.drawings.utilities.GeneralPathWrapper;
 public class VendingMachine extends GeneralPathWrapper implements Shape
 {
      /**
-       Constructor
+       Constructor for object of basic VendingMachine
 
        @param x x coord of lower left corner of machine
        @param y y coord of lower left corner of machine

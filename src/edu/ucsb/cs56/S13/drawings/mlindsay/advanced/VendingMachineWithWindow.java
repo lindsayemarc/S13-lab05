@@ -23,7 +23,13 @@ import edu.ucsb.cs56.S13.drawings.utilities.GeneralPathWrapper;
 public class VendingMachineWithWindow extends VendingMachine implements Shape
 {
     /**
-     * Constructor for objects of class Door
+     * Constructor for objects of VendingMachine with windows
+     
+       @param x x coord of lower left corner of machine
+       @param y y coord of lower left corner of machine
+       @param width width of machine
+       @param height height of machine
+       
      */
     public VendingMachineWithWindow(double x, double y, double width, double height)
     {
